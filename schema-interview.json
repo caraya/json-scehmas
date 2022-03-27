@@ -1,0 +1,118 @@
+{
+	"title": "JSON schema for interviews",
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"type": "object",
+	"properties": {
+		"$schema": {
+			"type": "string"
+		},
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the block"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the interview"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of interview",
+      "default": "interview",
+      "enum": [
+        "interview",
+        "interview-one-on-one",
+        "interview-group",
+        "interview-one-on-one-video",
+        "interview-group-video",
+        "interview-one-on-one-audio",
+        "interview-group-audio"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "description": "Date of the interview",
+      "format": "date-time"
+    },
+    "location": {
+      "type": "string",
+      "description": "Location of the interview"
+    },
+    "interviewer": {
+      "type": "array",
+      "description": "Interviewer(s) of the interview",
+      "items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/person" 
+        }
+      }
+    },
+    "interviewee": {
+      "items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/person"
+        }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Format of the audio"
+          },
+        "url": {
+          "type": "string",
+          "description": "URL of the audio file"
+        },
+        "duration": {
+          "type": "number",
+          "description": "Duration of the audio file"
+        }
+      },
+      "required": [
+        "format",
+        "url",
+        "duration"
+      ]
+    },
+    "transcript": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "URL of the transcript file"
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the transcript file"
+        }
+      },
+      "required": [
+        "url",
+        "content"
+      ]
+
+    }
+  },
+  "$defs": {
+    "person": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the person"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of the person"
+        }
+      },
+      "required": [
+        "name",
+        "email"
+      ]
+    }
+  }
+}
