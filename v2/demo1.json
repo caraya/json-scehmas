@@ -1,0 +1,32 @@
+{
+  "interview": {
+    "id": "group-interview-001",
+    "title": "First Group Interview",
+    "kind": "interview-group",
+    "project": "research interview 001",
+    "date": "2022-03-27",
+    "location": "Office",
+    "interviewer": [
+      {
+        "name": "Batman",
+        "email": "bm@gothamn.com"
+      }
+    ],
+    "interviewee": [
+      {
+        "name": "Scarecrow",
+        "email": "drCrane@arkham.com"
+      }
+    ],
+    "media": {
+      "format": "mp3",
+      "url": "https://example.com/audio/clip001.mp3",
+      "duration": 45,
+      "duration_unit": "minutes"
+    },
+    "transcript": {
+      "url": "https://example.com/transcripts/clip001.html",
+      "content": "the textual content of the transcript"
+    }
+  }
+}
