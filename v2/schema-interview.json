@@ -1,0 +1,140 @@
+{
+  "title": "JSON schema for interviews",
+  "apiVersion": 2,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the block"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the interview"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of interview",
+      "default": "interview",
+      "enum": [
+        "interview",
+        "interview-one-on-one",
+        "interview-group",
+        "interview-one-on-one-video",
+        "interview-group-video",
+        "interview-one-on-one-audio",
+        "interview-group-audio"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "description": "Date of the interview",
+      "format": "date"
+    },
+    "location": {
+      "type": "string",
+      "description": "Location of the interview"
+    },
+    "interviewers": {
+      "type": "array",
+      "description": "Interviewer(s) of the interview",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/$defs/person"
+      }
+    },
+    "interviewees": {
+      "type": "array",
+      "description": "Subject(s) of the interview",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/$defs/person"
+      }
+    },
+    "media": {
+      "items": {
+        "$ref": "#/$defs/media"
+      }
+    },
+    "transcript": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "URL of the transcript file"
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the transcript file"
+        }
+      },
+      "required": [
+        "url",
+        "content"
+      ]
+    }
+  },
+  "$defs": {
+    "person": {
+      "title": "JSON schema for a person",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the person"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of the person"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "media": {
+      "type": "object",
+      "description": "Record of the media used for interview",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of media used for the interview.\n\nThe \"n\\a\" value is used for interviews that were not recorded and where a paper transcript may exist that needs to be manually added.",
+          "default": "audio",
+          "enum": [
+            "audio",
+            "video",
+            "n/a"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "description": "Format of the media recorded for interview (where applicable)"
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the media file (where applicable)"
+        },
+        "duration": {
+          "type": "number",
+          "description": "Duration of the media file"
+        },
+        "duration_unit": {
+          "type": "string",
+          "desscription": "the unit for duration"
+        }
+      },
+      "required": [
+        "kind",
+        "format",
+        "url",
+        "duration",
+        "duration_unit"
+      ]
+    }
+  }
+}

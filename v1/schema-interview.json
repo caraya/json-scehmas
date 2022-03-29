@@ -1,11 +1,12 @@
 {
-	"title": "JSON schema for interviews",
-	"$schema": "https://json-schema.org/draft/2019-09/schema",
-	"type": "object",
-	"properties": {
-		"$schema": {
-			"type": "string"
-		},
+  "title": "JSON schema for interviews",
+  "apiVersion": 1,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
     "id": {
       "type": "string",
       "description": "Unique identifier for the block"
@@ -31,28 +32,28 @@
     "date": {
       "type": "string",
       "description": "Date of the interview",
-      "format": "date-time"
+      "format": "date"
     },
     "location": {
       "type": "string",
       "description": "Location of the interview"
     },
-    "interviewer": {
+    "interviewers": {
       "type": "array",
       "description": "Interviewer(s) of the interview",
+      "minItems": 1,
+      "maxItems": 5,
       "items": {
-        "type": "array",
-        "items": {
-          "$ref": "#/$defs/person" 
-        }
+        "$ref": "#/$defs/person"
       }
     },
-    "interviewee": {
+    "interviewees": {
+      "type": "array",
+      "description": "Subject(s) of the interview",
+      "minItems": 1,
+      "maxItems": 5,
       "items": {
-        "type": "array",
-        "items": {
-          "$ref": "#/$defs/person"
-        }
+        "$ref": "#/$defs/person"
       }
     },
     "audio": {
@@ -61,7 +62,7 @@
         "format": {
           "type": "string",
           "description": "Format of the audio"
-          },
+        },
         "url": {
           "type": "string",
           "description": "URL of the audio file"
@@ -69,12 +70,17 @@
         "duration": {
           "type": "number",
           "description": "Duration of the audio file"
+        },
+        "duration_unit": {
+          "type": "string",
+          "desscription": "the unit for duration"
         }
       },
       "required": [
         "format",
         "url",
-        "duration"
+        "duration",
+        "duration_unit"
       ]
     },
     "transcript": {
@@ -93,11 +99,11 @@
         "url",
         "content"
       ]
-
     }
   },
   "$defs": {
     "person": {
+      "title": "JSON schema for a person",
       "type": "object",
       "properties": {
         "name": {
@@ -110,8 +116,7 @@
         }
       },
       "required": [
-        "name",
-        "email"
+        "name"
       ]
     }
   }
